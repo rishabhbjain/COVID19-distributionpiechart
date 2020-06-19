@@ -9,13 +9,16 @@ df.drop(['iso_code', 'new_cases', 'total_deaths', 'new_deaths', 'total_cases_per
 df = df.loc[df['date'] == '2020-05-30']
 df = df.loc[df['location'] != 'World']
 df.drop(['date'], axis=1, inplace=True)
-fig = px.pie(df, values='total_cases', names='location', title='Countrywise - Distribution of COVID - 19')
+fig = px.pie(df, values='total_cases', names='location', title='Countrywise - Distribution of COVID - 19 (data - till 5/31/2020)')
 fig.show()
 
 app = dash.Dash()
+
+server = app.server
+
 app.layout = html.Div([
     dcc.Graph(figure=fig)
 ])
 
 if __name__ == '__main__':
-    app.run_server(debug=True, use_reloader=False)
+    app.run_server(debug=True)
